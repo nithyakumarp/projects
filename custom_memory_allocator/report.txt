@@ -1,0 +1,54 @@
+Compare your optimized allocator to the xv6 allocator. 
+For each of (list, ivec), pick an input size where the slower 
+allocator takes about 10 seconds. 
+How fast did each allocator run for that input? Which one was 
+faster and by how much? Show measurements with a table.
+[Answer]
+The table below gives the comparison between the real times of XV6 vs Optimized and System vs optimized.
+
+All collatz results are given below in seconds
+----------------- ----------- ----------------
+TOP              |  XV6      |      OPT
+----------------- ----------- ----------------
+list : 6000      |  10.455   |  7.021
+------------------ ----------------
+ivec : 12000     |  11.466   |  0.122
+------------------ ----------------
+Speedup: list : XV6/OPT = 10.455/7.021 = 1.48 (Optimized version is
+ 1.48 times faster than the XV6 allocator)
+ivec: XV6/OPT: 11.466/0.122 = 93.98 (Optimized version is 93.98 times
+faster than xv6 allocator)
+
+Compare your optimized allocator to the system allocator. 
+[Answer]
+----------------- ----------- ----------------
+TOP              |  SYS      |      OPT
+----------------- ----------- ----------------
+list : 7000      |  0.142    |  10.645
+------------------ ---------------------------
+ivec : 15000     |  0.499    |  8.244
+------------------ --------------------------
+speedup: list OPT/SYS = 10.645/0.142 = 74.96 
+(system allocator is 74.96 times faster than optimized version)
+ivec OPT/SYS = 8.244/0.499 = 16.52
+(system allocator is 16.52 times faster than optimized version)
+
+
+What techniques did you use in your optimized allocator.
+How does your allocator handle reusing memory?
+[Answer]
+I used buckets allocator system , where I created buckets for the 
+ranges 1,2,4,8,16,32 .... 4096 on top of a XV6 based allocator . 
+
+My allocator adds the free memory to the free list in the particular bucket's free list. 
+
+What was the most significant challenge in building your optimized allocator.
+If you were to redo the assignment would you use the same allocator design? Why?
+[Answer]
+Challenge that I faced is with locking and unlocking using mutexes
+for mallocs and frees.I had to print where its locking and unlocking
+to find where it deadlocked and make appropriate change. 
+
+I would redo this assignment by implementing arenas techniques , 
+as it would be more optimized allocator to give a better time. 
+Using arenas makes the allocator more elegant and best performing.   

@@ -1,0 +1,111 @@
+Assignment 6 -- Report
+
+**Specifications of Local machine and CCIS Server**
++------------------+--------------------------------+------------------------------------------+--------+
+|                  |              CCIS                       |               Local Machine              |
++------------------+--------------------------------+------------------------------------------+--------+
+| Operating System |      CentOS Linux 7 (Core)              |       Debian GNU/Linux 10 (buster)       |
++------------------+--------------------------------+------------------------------------------+--------+
+|  Processor Model | Intel(R) Xeon(R) Gold 5118 CPU @ 2.3GHz | Intel(R) Core(TM) i7-8550U CPU @ 1.80GHz |
++------------------+--------------------------------+------------------------------------------+--------+
+|  Number of Cores |               24                        |                     4                    |
++------------------+--------------------------------+------------------------------------------+--------+
+| Amount of RAM(GB)|              180                        |                     3                    |
++------------------+--------------------------------+------------------------------------------+--------+
+
+
+
+**Table with Measured time and parallel speedup**
++---------------------------------------------------------------------------------------------------+-------------------------------------------------+
+|                                               psort                                               |                      tsort                      |
++-------------------------------------------------+-------------------------------------------------+-------------------------------------------------+
+|                       CCIS                      |                  LOCAL MACHINE                  |                       CCIS                      |
++---------------------+-----------------+---------+---------------------+-----------------+---------+---------------------+-----------------+---------+
+| Number of Processes | Time to execute | Speedup | Number of Processes | Time to execute | Speedup | Number of Processes | Time to execute | Speedup |
++---------------------+-----------------+---------+---------------------+-----------------+---------+---------------------+-----------------+---------+
+|          1          |      17.03      |    1    |          1          |      23.74      |    1    |          1          |      17.00      |    1    |
++---------------------+-----------------+---------+---------------------+-----------------+---------+---------------------+-----------------+---------+
+|          4          |      8.91       |   1.91  |          4          |      11.91      |   1.99  |          4          |       8.16      |  2.083  |
++---------------------+-----------------+---------+---------------------+-----------------+---------+---------------------+-----------------+---------+
+|          8          |      5.28       |  3.225  |          8          |      11.47      |  2.069  |          8          |       5.62      |  3.024  |
++---------------------+-----------------+---------+---------------------+-----------------+---------+---------------------+-----------------+---------+
+
+**Analyzing the results**
+I am using CCIS server for running tsort as well because, my local 
+machine has only 4 cores.
+
+We observe the time required to execute psort on local machine is 
+less than the time required to run this on the CCIS server.
+    I believe this is because, The CCIS server resources are shared
+     among many people and the resource accessible by one person is very limited.
+    Our local machine produces better results for a single process 
+    sort because the whole resource is available.
+
+The speedup seen on the CCIS server is very high when compared to the
+ speedup seen on local machine.
+    This is because the CCIS server has 24 cores where as our local 
+    machine has only 4 cores.
+    Parallelism is efficiently used in the CCIS server.
+    Running 8 processes on our local machine simply means using the 
+    already available 4 cores to schedule processes among them.
+
+The psort and tsort speedups for the CCIS server is almost similar
+    I believe the threads version should effectively run faster than
+     processes version because creating threads is more finegrain 
+     parallelism and it should take less time to create and perform 
+     better and creating processes
+    The traffic on CCIS server is unpredictable.
+    So, there might have been less traffic when I executed psort and
+     more traffic when I executed tsort. It might have been the 
+     reason why I am getting this kind of trend.
+
+We are not getting the speedup that we expect.
+    This is because of the overhead that we have to create a process
+     or a thread and also there is a lot of single threaded code 
+     executing.
+    This single threaded part of the program takesup processor time
+     when we time the program with the time function.
+
+
+**Is sample sort a good parallel sorting algorithm**
+ 
+Both Gustafsons and Amdahl's Law talks about parallely running a 
+program and getting speedup improvements.
+Amdahl's law gives a formuls that gives theoretical speedup in the
+ latency of the execution of a task at a fixed data that can be 
+ expected from a system when its resources are improved.
+There are studies done that prove that sample sort is the best 
+parallel sorting algorithm.
+    I believe we do a lot of single threaded overhead to a parallelly
+     running performing algorithm. 
+    Also the way we sample and get the samps data is very random. We
+     may get an excellent parallelization one time and may not get 
+     any efficient parallelization the other time.
+    So, I think sorting in parallel is a good method only if the data
+     that we are sorting is very huge. Else its just a waste of 
+     processor time.
+
+**Which performs better threads or processes**
+
+Logically threads must perform better because creating threads is 
+light than creating processes and it should take less time.
+Here we get almost the same time beacuse of the unpredictable nature
+ of the CCIS server.
+
+**Modifying the psort to sample 61*(P-1) samples instead of 3*(P-1)
+ samples**
+
+Modifying and running this modified psort program on CCIS server
+ gives this following result:
+    17.1 seconds for 1 processes
+    and 7.8 seconds for 8 processes
+No, it does not improve parallel speedup because, it adds a large
+ serial overhead.
+It is taking the same time for 1 processes whereas it takes longer
+ time for 8 processes
+    This is because we are sampling a higher number of values than
+     the other version.
+    So, it has a greater single threaded overhead than the other
+     versions.
+    Interestingly, the parallelized sections will take the exact
+     same time.

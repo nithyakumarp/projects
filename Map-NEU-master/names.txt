@@ -1,0 +1,52 @@
+20 Rubenstein Hall
+21 Bunstein hall
+23A West village residence complex A
+23B West village residence complex B
+23C West village residence complex C 
+23E West village residence complex E
+23F West village residence complex F
+23G West village residence complex G
+23H West village residence complex H
+24 Ryder hall
+25 West Village Parking Garage
+26 Behrakis Health Sciences Center
+27 OBryant African American Institute
+28 Willis hall
+29 Meserve hall
+30 Shillman hall
+31 Nightingale Hall
+33 Holmes hall
+34 Lake hall
+35 kariotis hall
+36 Cargill hall
+37 Stearns center
+38 Knowles center
+39 Dockser hall
+40 Barletta Natatorium
+41 Cabot Physical Education Center
+42 Richards hall
+43 Dodge hall
+44 Mathews Arena
+45 Gainsborough Parking Garage
+46 Hurtig hall
+47 Cullinane hall
+48 Mugar life sciences building
+49 Robinson hall
+50 Curry student center
+51 Blackman Auditorium
+52 Ell hall
+53 Hayden hall
+54 Churchill hall
+55 Forsyth building
+56 Latino/a Student Cultural Center
+57 Dana Research Center
+58 Snell engineering center
+59 Snell library
+60 Egan Engineering/
+Science Research Center
+61 Architecture studio
+78 Hastings Hall at YMCA
+82 East village
+100 Massachusetts Avenue Station
+101 Ruggles station
+102 Symphony Station
